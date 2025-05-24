@@ -1,14 +1,54 @@
+---
+import "./src/styles/global.css"
+
+import Header from "../sections/Header.astro"
+import Footer from "../sections/Footer.astro"
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<title>
+			Transcoralv
+		</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta 
+		name="description" 
+		content="Transcoralv es una empresa dedicada al transporte de carga." />
+
+		<meta 
+		property="og:title"
+		content="Transcoralv" />
+		<meta
+		property="og:description"
+		content="Transcoralv es una empresa dedicada al transporte de carga." />
+		<meta
+		property="og:image"
+		content="https://transcoralv.com/wp-content/uploads/2020/10/1-2000x1000-1-e1602828490864.png" />
+		<meta
+		property="og:url"
+		content="https://transcoralv.com" />
+		<meta
+		property="og:type"
+		content="website" />
+		<meta
+		property="og:locale"
+		content="es_ES" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
 	</head>
+
 	<body>
-		<slot />
+	 <Header />
+	 <main>
+     <slot/> 
+	 </main>
+	 <Footer />
 	</body>
 </html>
 
@@ -18,5 +58,9 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		background-color: #ffffff; 
+	}
+	main {
+		min-height: 100vh;
 	}
 </style>
