@@ -1,11 +1,8 @@
 ---
 const { pathname } = Astro.url
 
-// Rutas donde NO debe aparecer el logo
 const hideLogoRoutes = ['/']
 const shouldShowLogo = !hideLogoRoutes.includes(pathname)
-
-// Comprueba si la ruta actual está activa
 const isActive = (path: string) => pathname === path
 ---
 
@@ -24,8 +21,8 @@ const isActive = (path: string) => pathname === path
   </button>
 </div>
 
-<header class="fixed top-0 z-50 mx-auto flex h-20 w-full select-none items-center text-white sm:h-screen sm:overflow-hidden md:h-20">
-  <div class="relative flex justify-between px-6 py-4 md:w-full">
+<header class="fixed top-0 z-50 mx-auto flex w-full select-none items-center text-white md:h-20 h-16 overflow-visible">
+  <div class="relative flex justify-between px-6 py-4 md:w-full w-full overflow-visible">
     <a href="/" class="cursor-pointer transition duration-300 hover:scale-110 md:hidden">
       <img src="/favicon.svg" alt="logo" class="h-auto w-7" />
     </a>
@@ -33,8 +30,8 @@ const isActive = (path: string) => pathname === path
     <div id="overlay-menu" class="bg-black/50 fixed inset-0 hidden h-screen md:hidden"></div>
     <nav
       id="navContent"
-      class="bg-black/90 invisible fixed right-0 top-0 mx-auto h-screen w-full max-w-none translate-x-full items-center justify-between space-y-2 px-6 pt-14 text-xs font-light backdrop-blur-2xl 
-      md:visible md:relative md:flex md:!h-fit md:w-full md:translate-x-0 md:space-y-0 md:bg-transparent md:py-4 md:backdrop-blur-none md:justify-between md:items-center lg:text-sm"
+      class="relative invisible fixed right-0 top-0 mx-auto h-screen w-full max-w-none translate-x-full items-center justify-between space-y-2 px-6 pt-14 text-xs font-light backdrop-blur-2xl 
+      md:visible md:relative md:flex md:!h-fit md:w-full md:translate-x-0 md:space-y-0 md:bg-transparent md:py-4 md:backdrop-blur-none md:justify-between md:items-center lg:text-sm overflow-visible"
     >
       {/* IZQUIERDA */}
       <div class="flex flex-col justify-start space-y-2 md:flex-row md:gap-12 md:space-y-0 md:w-1/3 md:justify-start">
@@ -85,13 +82,6 @@ const isActive = (path: string) => pathname === path
               isActive('/responsabilidad-corporativa') ? 'w-[51%]' : 'w-0 group-hover:w-[51%]',
             ]}></div>
           </div>
-        </a>
-      </div>
-
-      {/* CENTRO (LOGO) */}
-      <div class="hidden md:flex md:w-1/3 md:justify-center">
-        <a href="/" class="transition duration-300 hover:scale-110">
-          <img src="/favicon.svg" alt="logo" class="h-10 logo-glow-teal" />
         </a>
       </div>
 
@@ -147,6 +137,16 @@ const isActive = (path: string) => pathname === path
         </a>
       </div>
     </nav>
+
+    {/* LOGO ABSOLUTO SOBRE EL HEADER */}
+    <a
+      href="/"
+      class="hidden md:inline-block absolute left-1/2 top-[100%] z-50 -translate-x-1/2 -translate-y-1/2 pointer-events-auto transition duration-500 hover:scale-110"
+      style="height: 180px; width: 180px;"
+      aria-label="Ir al inicio"
+    >
+      <img src="/favicon.svg" alt="logo" class="logo-glow-teal w-full h-full object-contain" />
+    </a>
   </div>
 </header>
 
@@ -157,6 +157,7 @@ const isActive = (path: string) => pathname === path
     animation-timeline: scroll();
     animation-range: 0 250px;
     border-bottom: 1px solid transparent;
+    overflow: visible;
   }
 
   @keyframes header-blur-scroll {
@@ -176,6 +177,7 @@ const isActive = (path: string) => pathname === path
     transition:
       translate 0.3s ease-in-out,
       visibility 0.3s 0.3s;
+    overflow: visible;
   }
   #navContent.showing {
     visibility: visible;
