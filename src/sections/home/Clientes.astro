@@ -1,58 +1,48 @@
 ---
 import { REFERENCES } from "../../consts/referencias";
-
-const firstRow = REFERENCES.slice(0, 6);
-const secondRow = REFERENCES.slice(6);
 ---
-<section id="referencias" class="flex justify-center items-center py-12">
-  <div class="bg-white/90 rounded-3xl shadow-2xl px-8 py-10 max-w-6xl w-full border border-gray-100">
-    <div class="grid grid-cols-2 md:grid-cols-7 gap-4 mb-6">
-      {
-        firstRow.map(({ url, image, name }, idx) => (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`size-20 flex justify-center items-center transition-transform duration-300 hover:scale-125 opacity-0 animate-fade-in animate-delay-[${idx * 100}ms]`}
-            aria-label={name}
-            style="animation-fill-mode: forwards;"
-          >
-            {image.logo && <image.logo class="h-20 w-auto" />}
-          </a>
-        ))
-      }
-    </div>
-    <div class="grid grid-cols-3 md:grid-cols-9 gap-4">
-      {
-        secondRow.map(({ url, image, name }, idx) => (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`size-20 flex justify-center items-center transition-transform duration-300 hover:scale-125 opacity-0 animate-fade-in animate-delay-[${(idx + firstRow.length) * 100}ms]`}
-            aria-label={name}
-            style="animation-fill-mode: forwards;"
-          >
-            {image.logo && <image.logo class="h-20 w-auto" />}
-          </a>
-        ))
-      }
+<section id="referencias" class="w-full flex justify-center items-center py-16 bg-white">
+  <div class="relative w-full overflow-hidden">
+    <div class="carousel-track flex items-center gap-12 animate-marquee">
+      {REFERENCES.map(({ url, image, name }) => (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={name}
+          class="flex-shrink-0 px-8 py-8"
+        >
+          {image.logo && <image.logo class="h-20 w-auto drop-shadow-lg" />}
+        </a>
+      ))}
+      {REFERENCES.map(({ url, image, name }) => (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={name + '-clone'}
+          class="flex-shrink-0 px-8 py-8"
+        >
+          {image.logo && <image.logo class="h-20 w-auto drop-shadow-lg" />}
+        </a>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-:global(@keyframes fade-in) {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
+.carousel-track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  will-change: transform;
 }
-:global(.animate-fade-in) {
-  animation: fade-in 0.8s cubic-bezier(0.4,0,0.2,1) both;
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 </style>
