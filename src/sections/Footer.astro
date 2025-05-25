@@ -3,14 +3,30 @@ import Facebook from '../assets/svg/facebook-svgrepo-com.svg';
 import Instagram from '../assets/svg/instagram.svg';
 import LinkedIn from '../assets/svg/linkedin.svg';
 ---
-<footer class="bg-black text-white py-30">
-    <div class="relative h-full flex flex-col justify-center items-center text-white">
-     <div class="footer-content">
-        <p>@ 2025 Transcoralv S.A. Todos los derechos reservados.</p>
-        <div class="flex flex-row gap-x-2 items-center justify-center">
-            <a href="https://www.facebook.com/transcoralv" target="_blank" rel="noopener noreferrer"><Facebook class="w-14.5 h-14.5 hover:scale-125 transition"/></a>
-            <a href="https://www.instagram.com/transcoralv/" target="_blank" rel="noopener noreferrer"><Instagram class="w-14.5 h-14.5 hover:scale-125 transition"/></a>
-            <a href="https://www.linkedin.com/company/transcoralv/" target="_blank" rel="noopener noreferrer"><LinkedIn class="w-14 h-14 hover:scale-125 transition"/></a>
-     </div>
+<footer class="bg-gray-800 text-white py-10">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-white">
+        <div class="mb-4 md:mb-0 md:text-left w-full md:w-1/3 flex justify-start text-sm">
+            <p>@ 2025 Transcoralv S.A. Todos los derechos reservados.<br/>
+                Creador por: 
+            <a 
+    href="https://github.com/DamianRoc13" 
+    class="text-[#c8102e] underline hover:text-red-700 transition"
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    Damian Olivo
+  </a>
+</p>
+        </div>
+        <div class="mb-4 md:mb-0 w-full md:w-1/3 flex justify-center">
+            <div class="flex flex-row gap-x-2 items-center">
+                <a href="https://www.facebook.com/transcoralv" target="_blank" rel="noopener noreferrer"><Facebook class="w-10.5 h-10.5 hover:scale-125 transition"/></a>
+                <a href="https://www.instagram.com/transcoralv/" target="_blank" rel="noopener noreferrer"><Instagram class="w-10.5 h-10.5 hover:scale-125 transition"/></a>
+                <a href="https://www.linkedin.com/company/transcoralv/" target="_blank" rel="noopener noreferrer"><LinkedIn class="w-10 h-10 hover:scale-125 transition"/></a>
+            </div>
+        </div>
+        <div class="w-full md:w-1/3 flex justify-end md:text-right text-sm">
+            <span>Km 14,5 Vía Duran, Yaguachi 092056</span>
+        </div>
     </div>
 </footer>
