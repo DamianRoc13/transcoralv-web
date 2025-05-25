@@ -9,7 +9,10 @@
   "
 >
   <!-- Izquierda: Texto -->
-  <div class="md:w-1/2 w-full h-1/2 md:h-full flex flex-col justify-center px-10 py-12 pr-30">
+ <div
+  id="texto-operaciones"
+  class="md:w-1/2 w-full h-1/2 md:h-full flex flex-col justify-center px-10 py-12 pr-30 opacity-0 transition-all duration-1000"
+>
     <h2 class="text-[#c8102e] text-lg font-semibold mb-3 tracking-wide uppercase opacity-60">
       Servicios de Transporte y Logística
     </h2>
@@ -37,9 +40,44 @@
   <!-- Derecha: Imagen -->
   <div class="md:w-1/2 w-full h-1/2 md:h-full flex items-center justify-end overflow-hidden">
   <img 
-    src="/public/truck.png" 
-    alt="Camión Transcoralv" 
-    class="object-contain w-[160%] h-auto translate-x-16 md:translate-x-32"
-  />
+  id="camion-img"
+  src="/public/truck.png" 
+  alt="Camión Transcoralv" 
+  class="object-contain w-[160%] h-auto opacity-0 translate-x-32 transition-all duration-1000"
+/>
 </div>
+<script is:inline>
+  const img = document.getElementById('camion-img');
+  function revealOnScroll() {
+    if (!img) return;
+    const rect = img.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const visible = Math.max(0, Math.min(1, (windowHeight - rect.top) / (rect.height * 0.7)));
+    img.style.opacity = visible;
+    img.style.transform = `translateX(${(1 - visible) * 8}rem)`;
+  }
+
+  const texto = document.getElementById('texto-operaciones');
+  function revealTextOnScroll() {
+    if (!texto) return;
+    const rect = texto.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const visible = Math.max(0, Math.min(1, (windowHeight - rect.top) / (rect.height * 0.7)));
+    texto.style.opacity = visible;
+    texto.style.transform = `translateX(-${(1 - visible) * 8}rem)`;
+  }
+
+  window.addEventListener('scroll', () => {
+    revealOnScroll();
+    revealTextOnScroll();
+  });
+  window.addEventListener('resize', () => {
+    revealOnScroll();
+    revealTextOnScroll();
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    revealOnScroll();
+    revealTextOnScroll();
+  });
+</script>
 </section>
