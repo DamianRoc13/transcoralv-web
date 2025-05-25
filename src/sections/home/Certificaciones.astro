@@ -19,17 +19,19 @@
       }
     ].map((cert, idx) => (
       <div
-        class="group [perspective:1000px] w-64 h-64 cursor-pointer"
-        onclick={`document.getElementById('card-${idx}').classList.toggle('is-flipped')`}
+        class="group [perspective:1000px] w-64 h-64 cursor-pointer overflow-hidden transition-transform duration-300 md:hover:-translate-y-2"
         tabindex="0"
         aria-label={`Tarjeta de certificación ${cert.title}`}
+        role="button"
+        onclick={`document.getElementById('card-${idx}').classList.toggle('is-flipped')`}
+        onkeydown={`if(event.key==='Enter'||event.key===' '){document.getElementById('card-${idx}').classList.toggle('is-flipped');}`}
       >
         <div
           id={`card-${idx}`}
-          class="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:-translate-y-2"
+          class="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]"
         >
           {/* Cara frontal */}
-          <div class="absolute w-full h-full bg-white rounded-xl shadow-lg flex items-center justify-center backface-hidden transition-transform duration-500 overflow-hidden">
+          <div class="absolute w-full h-full bg-white rounded-xl shadow-lg flex items-center justify-center backface-hidden transition-transform duration-500">
             <img src={cert.img} alt={cert.title} class="object-contain w-full h-full" />
           </div>
           {/* Cara trasera */}
