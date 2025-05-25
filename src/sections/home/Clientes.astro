@@ -15,13 +15,16 @@ const logos = [...REFERENCES, ...REFERENCES];
     </h2>
   </div>
   <div class="relative w-full overflow-hidden">
-    <div class="carousel-track flex items-center gap-12 animate-marquee">
+    <div
+      class="carousel-track flex items-center gap-12"
+      id="carousel-track"
+    >
       {logos.map(({ url, image, name }, idx) => (
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={name + '-'+idx}
+          aria-label={name + '-' + idx}
           class="flex-shrink-0 px-8 py-8"
         >
           {image.logo && <image.logo class="h-20 w-auto drop-shadow-lg" />}
@@ -31,6 +34,37 @@ const logos = [...REFERENCES, ...REFERENCES];
   </div>
 </section>
 
+<script type="module" is:inline>
+  const track = document.getElementById('carousel-track');
+  let pos = 0;
+  let reqId;
+  let speed = 1; // píxeles por frame, ajusta para más o menos velocidad
+
+  function animate() {
+    pos -= speed;
+    // Cuando termina el primer set de logos, resetea el scroll
+    if (track) {
+      const firstHalf = track.scrollWidth / 2;
+      if (-pos >= firstHalf) {
+        pos = 0;
+      }
+      track.style.transform = `translateX(${pos}px)`;
+      reqId = requestAnimationFrame(animate);
+    }
+  }
+
+  // Espera a que carguen las imágenes para obtener el ancho correcto
+  window.addEventListener('load', () => {
+    pos = 0;
+    animate();
+  });
+
+  // Limpia la animación si navegas fuera
+  window.addEventListener('beforeunload', () => {
+    cancelAnimationFrame(reqId);
+  });
+</script>
+
 <style>
 .carousel-track {
   width: max-content;
@@ -38,12 +72,6 @@ const logos = [...REFERENCES, ...REFERENCES];
   align-items: center;
   gap: 3rem;
   will-change: transform;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 25s linear infinite;
+  transition: none;
 }
 </style>
