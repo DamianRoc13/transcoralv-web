@@ -19,16 +19,17 @@
       }
     ].map((cert, idx) => (
       <div
-        class="group [perspective:1000px] w-64 h-64 cursor-pointer overflow-hidden transition-transform duration-300 md:hover:-translate-y-2"
+        class="group [perspective:1000px] w-64 h-auto cursor-pointer overflow-visible md:overflow-hidden transition-transform duration-300 md:hover:-translate-y-2"
         tabindex="0"
         aria-label={`Tarjeta de certificación ${cert.title}`}
         role="button"
-        onclick={`document.getElementById('card-${idx}').classList.toggle('is-flipped')`}
-        onkeydown={`if(event.key==='Enter'||event.key===' '){document.getElementById('card-${idx}').classList.toggle('is-flipped');}`}
+        onclick={`if(window.innerWidth>=768){document.getElementById('card-${idx}').classList.toggle('is-flipped')}`}
+        onkeydown={`if(window.innerWidth>=768&&(event.key==='Enter'||event.key===' ')){document.getElementById('card-${idx}').classList.toggle('is-flipped');}`}
       >
+        {/* Card flip solo en md+ */}
         <div
           id={`card-${idx}`}
-          class="relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]"
+          class="relative w-full h-64 transition-transform duration-500 [transform-style:preserve-3d] hidden md:block"
         >
           {/* Cara frontal */}
           <div class="absolute w-full h-full bg-white rounded-xl shadow-lg flex items-center justify-center backface-hidden transition-transform duration-500">
@@ -37,6 +38,16 @@
           {/* Cara trasera */}
           <div class="absolute w-full h-full bg-[#c8102e] rounded-xl shadow-lg flex flex-col items-center justify-center text-white [transform:rotateY(180deg)] backface-hidden transition-transform duration-500 px-6">
             <span class="text-xl font-bold mb-4 text-center">{cert.title}</span>
+            <p class="text-base">{cert.desc}</p>
+          </div>
+        </div>
+        {/* Vista móvil: solo muestra imagen y debajo la info */}
+        <div class="block md:hidden w-full">
+          <div class="w-full h-48 bg-white rounded-xl shadow-lg flex items-center justify-center mb-2">
+            <img src={cert.img} alt={cert.title} class="object-contain w-full h-full" />
+          </div>
+          <div class="w-full bg-[#c8102e] rounded-xl shadow-lg flex flex-col items-center justify-center text-white px-6 py-4">
+            <span class="text-xl font-bold mb-2 text-center">{cert.title}</span>
             <p class="text-base">{cert.desc}</p>
           </div>
         </div>
